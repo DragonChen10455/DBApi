@@ -4,6 +4,7 @@ import db.*;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,17 +23,19 @@ public class TestInsertSinglePoint {
         tags.put("status", "1");
         Point point = new Point(metricName, tags);
 
-        long timeStampBegin = Util.dateStringToUTCMilliSeconds("2023-08-30 19:21:00");
+        long timeStampBegin = Util.dateStringToUTCMilliSeconds("2023-09-04 17:02:00");
         long testBegin = System.currentTimeMillis();
-        int dataCountPerPoint = 1000000;
+        int dataCountPerPoint = 10;
         long[] utcTimes = new long[dataCountPerPoint];
-        double[] values = new double[dataCountPerPoint];
+        double[] value1s = new double[dataCountPerPoint];
+        double[] value2s = new double[dataCountPerPoint];
 
         for (int i = 0; i < dataCountPerPoint; i++) {
             utcTimes[i] = timeStampBegin - i;
-            values[i] = i;
+            value1s[i] = i;
+            value2s[i] = i;
         }
-        PointVals pointVals = new PointVals(point, dataCountPerPoint, utcTimes, values);
+        PointVals pointVals = new PointVals(point, dataCountPerPoint, utcTimes, value1s, value2s);
         long testEndCompute = System.currentTimeMillis();
         entry.insertSinglPoint(pointVals);
         long testEnd = System.currentTimeMillis();

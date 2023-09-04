@@ -22,7 +22,7 @@ public class TestGetHistRaw {
         Point point = new Point(metricName, tags);
 
         String start = "2023-08-01 00:00:00";
-        String end =  "2023-08-31 00:00:00";
+        String end =  "2023-09-31 00:00:00";
         long startTime = Util.dateStringToUTCMilliSeconds(start);
         long endTime = Util.dateStringToUTCMilliSeconds(end);
 
