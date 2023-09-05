@@ -1,11 +1,15 @@
 package test;
 
-import db.*;
+import db.DBApiEntry;
+import db.Point;
+import db.PointVals;
+import db.Util;
 
 import java.text.ParseException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Random;
 
-public class TestInsertSinglePoint {
+public class TestInsertSinglePoint2D {
     public static void main(String[] args) throws ParseException {
         Random random = new Random();
         double min = 10.00;
@@ -18,22 +22,25 @@ public class TestInsertSinglePoint {
 
         String metricName = "metricName1";
         HashMap<String, String> tags = new HashMap<>();
-        tags.put("pointName", "pointName_test2");
+        tags.put("pointName", "pointName_test1");
         tags.put("status", "1");
         Point point = new Point(metricName, tags);
 
-        long timeStampBegin = Util.dateStringToUTCMilliSeconds("2023-09-05 20:00:00");
+        long timeStampBegin = Util.dateStringToUTCMilliSeconds("2023-09-05 15:46:00");
         long testBegin = System.currentTimeMillis();
         int dataCountPerPoint = 1000000;
         long[] utcTimes = new long[dataCountPerPoint];
-        double[] values = new double[dataCountPerPoint];
+        double[] value1s = new double[dataCountPerPoint];
+        double[] value2s = new double[dataCountPerPoint];
 
         for (int i = 0; i < dataCountPerPoint; i++) {
-            double randomValue = min + (max - min) * random.nextDouble();
+            double randomValue1 = min + (max - min) * random.nextDouble();
+            double randomValue2 = min + (max - min) * random.nextDouble();
             utcTimes[i] = timeStampBegin - i;
-            values[i] = Math.round(randomValue * 100.0) / 100.0;
+            value1s[i] = Math.round(randomValue1 * 100.0) / 100.0;
+            value2s[i] = Math.round(randomValue2 * 100.0) / 100.0;
         }
-        PointVals pointVals = new PointVals(point, dataCountPerPoint, utcTimes, values);
+        PointVals pointVals = new PointVals(point, dataCountPerPoint, utcTimes, value1s, value2s);
         long testEndCompute = System.currentTimeMillis();
         entry.insertSinglPoint(pointVals);
         long testEnd = System.currentTimeMillis();
