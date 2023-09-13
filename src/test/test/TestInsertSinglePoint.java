@@ -8,8 +8,8 @@ import java.util.*;
 public class TestInsertSinglePoint {
     public static void main(String[] args) throws ParseException {
         Random random = new Random();
-        double min = 10.00;
-        double max = 100.00;
+        double min = 1.00;
+        double max = 10000.00;
         String host = Globals.HOST;
         int port = Globals.port;
         DBApiEntry entry = DBApiEntry.initApiEntry(host, port);
@@ -22,7 +22,8 @@ public class TestInsertSinglePoint {
         tags.put("status", "1");
         Point point = new Point(metricName, tags);
 
-        long timeStampBegin = Util.dateStringToUTCMilliSeconds("2023-09-05 20:00:00");
+        long timeStampBegin = Util.dateStringToUTCMilliSeconds("2023-08-13 00:00:00");
+        long timeStampEnd = Util.dateStringToUTCMilliSeconds("2023-09-13 00:00:00");
         long testBegin = System.currentTimeMillis();
         int dataCountPerPoint = 1000000;
         long[] utcTimes = new long[dataCountPerPoint];
@@ -30,7 +31,8 @@ public class TestInsertSinglePoint {
 
         for (int i = 0; i < dataCountPerPoint; i++) {
             double randomValue = min + (max - min) * random.nextDouble();
-            utcTimes[i] = timeStampBegin - i;
+            long randomTimeStamp = timeStampBegin + (long) (random.nextFloat() * (timeStampEnd - timeStampBegin + 1));
+            utcTimes[i] = randomTimeStamp;
             values[i] = Math.round(randomValue * 100.0) / 100.0;
         }
         PointVals pointVals = new PointVals(point, dataCountPerPoint, utcTimes, values);
