@@ -20,33 +20,36 @@ public class TestInsertSinglePoint2D {
         entry.setUseLB(false);
 //        entry.setUseLB(true);
 
-        String metricName = "metricName1";
-        HashMap<String, String> tags = new HashMap<>();
-        tags.put("pointName", "pointName_test1");
-        tags.put("status", "1");
-        Point point = new Point(metricName, tags);
+        for (int epoch = 0; epoch < 1; epoch++) {
+            System.out.printf("第%s次%n", epoch + 1);
+            String metricName = "metricName" + epoch;
+            HashMap<String, String> tags = new HashMap<>();
+            tags.put("pointName", "pointName_test" + epoch);
+            tags.put("status", String.valueOf(epoch));
+            Point point = new Point(metricName, tags);
 
-        long timeStampBegin = Util.dateStringToUTCMilliSeconds("2023-08-13 00:00:00");
-        long timeStampEnd = Util.dateStringToUTCMilliSeconds("2023-09-13 00:00:00");
-        long testBegin = System.currentTimeMillis();
-        int dataCountPerPoint = 1000000;
-        long[] utcTimes = new long[dataCountPerPoint];
-        double[] value1s = new double[dataCountPerPoint];
-        double[] value2s = new double[dataCountPerPoint];
+            long timeStampBegin = Util.dateStringToUTCMilliSeconds("2023-09-01 00:00:00");
+            long timeStampEnd = Util.dateStringToUTCMilliSeconds("2023-09-22 00:00:00");
+            long testBegin = System.currentTimeMillis();
+            int dataCountPerPoint = 1000000;
+            long[] utcTimes = new long[dataCountPerPoint];
+            double[] value1s = new double[dataCountPerPoint];
+            double[] value2s = new double[dataCountPerPoint];
 
-        for (int i = 0; i < dataCountPerPoint; i++) {
-            double randomValue1 = min + (max - min) * random.nextDouble();
-            double randomValue2 = min + (max - min) * random.nextDouble();
-            long randomTimeStamp = timeStampBegin + (long) (random.nextFloat() * (timeStampEnd - timeStampBegin + 1));
-            utcTimes[i] = randomTimeStamp;
-            value1s[i] = Math.round(randomValue1 * 100.0) / 100.0;
-            value2s[i] = Math.round(randomValue2 * 100.0) / 100.0;
+            for (int i = 0; i < dataCountPerPoint; i++) {
+                double randomValue1 = min + (max - min) * random.nextDouble();
+                double randomValue2 = min + (max - min) * random.nextDouble();
+                long randomTimeStamp = timeStampBegin + (long) (random.nextFloat() * (timeStampEnd - timeStampBegin + 1));
+                utcTimes[i] = randomTimeStamp;
+                value1s[i] = Math.round(randomValue1 * 100.0) / 100.0;
+                value2s[i] = Math.round(randomValue2 * 100.0) / 100.0;
+            }
+            PointVals pointVals = new PointVals(point, dataCountPerPoint, utcTimes, value1s, value2s);
+            long testEndCompute = System.currentTimeMillis();
+            entry.insertSinglPoint(pointVals);
+            long testEnd = System.currentTimeMillis();
+            System.out.println(String.format("spend total:%d (ms) compute:%d (ms)", testEnd - testBegin,
+                    testEndCompute - testBegin));
         }
-        PointVals pointVals = new PointVals(point, dataCountPerPoint, utcTimes, value1s, value2s);
-        long testEndCompute = System.currentTimeMillis();
-        entry.insertSinglPoint(pointVals);
-        long testEnd = System.currentTimeMillis();
-        System.out.println(String.format("spend total:%d (ms) compute:%d (ms)", testEnd-testBegin,
-                testEndCompute-testBegin));
     }
 }

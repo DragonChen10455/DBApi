@@ -59,7 +59,6 @@ public class SendRequest {
 	多点的历史数据导入，content不以换行符分割
 	 */
 	public static void histDataImportJsonLine(String host, int port, int nameSpace, String content) {
-		System.out.println("import content:" + content);
 		String result = "";
 		try {
 //			host = String.format("http://%s:%d/insert/%d/%s/api/v1/import",
