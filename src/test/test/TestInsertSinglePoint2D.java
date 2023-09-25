@@ -29,7 +29,7 @@ public class TestInsertSinglePoint2D {
             Point point = new Point(metricName, tags);
 
             long timeStampBegin = Util.dateStringToUTCMilliSeconds("2023-09-01 00:00:00");
-            long timeStampEnd = Util.dateStringToUTCMilliSeconds("2023-09-22 00:00:00");
+            long timeStampEnd = Util.dateStringToUTCMilliSeconds("2023-09-25 00:00:00");
             long testBegin = System.currentTimeMillis();
             int dataCountPerPoint = 1000000;
             long[] utcTimes = new long[dataCountPerPoint];

@@ -83,20 +83,20 @@ public class PointVals implements Serializable {
 		return count==0;
 	}
 
-//	// 2维数据
-//	public PointVals subPointVals(int begin, int end) {
-//		int count = end-begin;
-//		PointVals resultPointVals = new PointVals(this.point, count, this.utcTimes, this.value1s, this.value2s);
-//		resultPointVals.setBeginIndex(begin);
-//		return resultPointVals;
-//	}
-
-	// 1维数据
+	// 2维数据
 	public PointVals subPointVals(int begin, int end) {
 		int count = end-begin;
-		PointVals resultPointVals = new PointVals(this.point, count, this.utcTimes, this.values);
+		PointVals resultPointVals = new PointVals(this.point, count, this.utcTimes, this.value1s, this.value2s);
 		resultPointVals.setBeginIndex(begin);
 		return resultPointVals;
 	}
+
+//	// 1维数据
+//	public PointVals subPointVals(int begin, int end) {
+//		int count = end-begin;
+//		PointVals resultPointVals = new PointVals(this.point, count, this.utcTimes, this.values);
+//		resultPointVals.setBeginIndex(begin);
+//		return resultPointVals;
+//	}
 }
 

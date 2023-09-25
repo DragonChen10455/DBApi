@@ -198,16 +198,16 @@ public class DBApiEntry{
             metric.put("__name__", pointVals.getFinalMetricName(metricNamePrefix));
             metric.putAll(pointVals.getTags());
             for (int index=0;index<pointVals.getCount();index++) {
-//                value1s.add(pointVals.getValue1(index));
-//                value2s.add(pointVals.getValue2(index));
-                values.add(pointVals.getValue(index));
+                value1s.add(pointVals.getValue1(index));
+                value2s.add(pointVals.getValue2(index));
+//                values.add(pointVals.getValue(index));
                 timestamps.add(pointVals.getUtcTime(index));
             }
             metrics.put("metric", metric);
             metrics.put("timestamps", timestamps);
-//            metrics.put("value1s", value1s);
-//            metrics.put("value2s", value2s);
-            metrics.put("values", values);
+            metrics.put("value1s", value1s);
+            metrics.put("value2s", value2s);
+//            metrics.put("values", values);
         return metrics.toJSONString();
     }
 
