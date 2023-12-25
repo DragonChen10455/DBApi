@@ -14,15 +14,15 @@ public class TestGetHistRaw {
         String host = Globals.HOST;
 //        String host = "192.168.50.130";
         int port = Globals.port;
-        String metricName = "metricName0";
+        String metricName = "metricName1";
         HashMap<String, String> tags = new HashMap<>();
-        tags.put("pointName", "pointName_test0");
-        tags.put("status", "0");
+        tags.put("pointName", "pointName_test1");
+        tags.put("status", "1");
 
         Point point = new Point(metricName, tags);
 
-        String start = "2023-12-01 00:00:00";
-        String end =  "2023-12-10 00:00:00";
+        String start = "2023-12-15 00:00:00";
+        String end =  "2023-12-25 00:00:00";
         long startTime = Util.dateStringToUTCMilliSeconds(start);
         long endTime = Util.dateStringToUTCMilliSeconds(end);
 

@@ -20,16 +20,16 @@ public class TestInsertSinglePoint2D {
         entry.setUseLB(false);
 //        entry.setUseLB(true);
 
-        for (int epoch = 0; epoch < 1; epoch++) {
-            System.out.printf("第%s次%n", epoch + 1);
+        for (int epoch = 1; epoch <= 1; epoch++) {
+            System.out.printf("第%s次%n", epoch);
             String metricName = "metricName" + epoch;
             HashMap<String, String> tags = new HashMap<>();
             tags.put("pointName", "pointName_test" + epoch);
             tags.put("status", String.valueOf(epoch));
             Point point = new Point(metricName, tags);
 
-            long timeStampBegin = Util.dateStringToUTCMilliSeconds("2023-12-01 00:00:00");
-            long timeStampEnd = Util.dateStringToUTCMilliSeconds("2023-12-10 00:00:00");
+            long timeStampBegin = Util.dateStringToUTCMilliSeconds("2023-12-15 00:00:00");
+            long timeStampEnd = Util.dateStringToUTCMilliSeconds("2023-12-25 00:00:00");
             long testBegin = System.currentTimeMillis();
             int dataCountPerPoint = 1000000;
             long[] utcTimes = new long[dataCountPerPoint];
